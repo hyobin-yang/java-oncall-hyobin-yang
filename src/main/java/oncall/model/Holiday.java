@@ -13,13 +13,20 @@ public enum Holiday {
 
     private final String holidayName;
     private final int month;
-    private final int day;
+    private final int date;
 
-    Holiday(String holidayName, int month, int day){
+    Holiday(String holidayName, int month, int date){
         this.holidayName = holidayName;
         this.month = month;
-        this.day = day;
+        this.date = date;
     }
 
-    //TODO: 공휴일인지 검사
+    public static boolean isLegalHoliday(int month, int date){
+        for (Holiday holiday : values()){
+            if ((holiday.month == month) && (holiday.date == date)){
+                return true;
+            }
+        }
+        return false;
+    }
 }
