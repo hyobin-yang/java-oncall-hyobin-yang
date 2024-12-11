@@ -69,6 +69,53 @@ class ApplicationTest extends NsTest {
                     "4월 29일 토 해시" + LINE_SEPARATOR,
                     "4월 30일 일 폴로"
             );
+
+            assertSimpleTest(() -> {
+                run(
+                        "5,월",
+                        "준팍,도밥,고니,수아,루루,글로,솔로스타,우코,슬링키,참새,도리",
+                        "수아,루루,글로,솔로스타,우코,슬링키,참새,도리,준팍,도밥,고니"
+                );
+                assertThat(output()).contains(
+                        "5월 1일 월 준팍" + LINE_SEPARATOR,
+                        "5월 2일 화 도밥" + LINE_SEPARATOR,
+                        "5월 3일 수 고니" + LINE_SEPARATOR,
+                        "5월 4일 목 수아" + LINE_SEPARATOR,
+                        "5월 5일 금(휴일) 루루"
+                );
+            });
+        });
+    }
+
+    @Test
+    void 특정_근무자가_이틀_연속_근무할_경우_근무자를_변경한다() {
+            assertSimpleTest(() -> {
+                run(
+                        "4,화",
+                        "준팍,도밥,고니,수아,루루,글로,솔로스타,우코,슬링키,참새,도리",
+                        "수아,루루,글로,솔로스타,우코,슬링키,참새,도리,준팍,도밥,고니"
+                );
+                assertThat(output()).contains(
+                        "4월 1일 화 준팍" + LINE_SEPARATOR,
+                        "4월 2일 수 도밥" + LINE_SEPARATOR,
+                        "4월 3일 목 고니" + LINE_SEPARATOR,
+                        "4월 4일 금 수아" + LINE_SEPARATOR,
+                        "4월 5일 토 루루"
+                );
+            });
+    }
+
+    @Test
+    void 법정공휴일에는_휴일_문구를_출력한다() {
+        assertSimpleTest(() -> {
+            run(
+                    "5,화",
+                    "준팍,도밥,고니,수아,루루,글로,솔로스타,우코,슬링키,참새,도리",
+                    "수아,루루,글로,솔로스타,우코,슬링키,참새,도리,준팍,도밥,고니"
+            );
+            assertThat(output()).contains(
+                    "5월 5일 토(휴일) 루루"
+            );
         });
     }
 
