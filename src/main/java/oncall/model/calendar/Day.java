@@ -1,6 +1,8 @@
-package oncall.model;
+package oncall.model.calendar;
 
 import oncall.exception.ErrorMessages;
+
+import java.util.Arrays;
 
 public enum Day {
     MON(1, "월", false),
@@ -10,6 +12,8 @@ public enum Day {
     FRI(5, "금", false),
     SAT(6, "토", true),
     SUN(7, "일", true);
+
+    public static final int TOTAL_DAY_COUNT = 7;
 
     private final int dayNumber;
     private final String day;
@@ -22,12 +26,10 @@ public enum Day {
     }
 
     public static Day getDay(String input){
-        for (Day day : values()){
-            if (day.day.equals(input)){
-                return day;
-            }
-        }
-        throw new IllegalArgumentException(ErrorMessages.INVALID_INPUT.getMessage());
+        return Arrays.stream(Day.values())
+                .filter(d -> d.day.equals(input))
+                .findFirst()
+                .orElseThrow( () -> new IllegalArgumentException(ErrorMessages.INVALID_INPUT.getMessage()));
     }
 
     public boolean isHoliday(){
@@ -43,12 +45,11 @@ public enum Day {
     }
 
     public static Day getDayBuyNumber(int number){
-        for (Day day : values()){
-            if (day.dayNumber == number){
-                return day;
-            }
-        }
-        throw new IllegalArgumentException("[SYSTEM] 잘못된 요일 값입니다.");
+        return Arrays.stream(Day.values())
+                .filter(d -> d.dayNumber == number)
+                .findFirst()
+                .orElseThrow( () -> new IllegalArgumentException(ErrorMessages.INVALID_INPUT.getMessage()));
+
     }
 
 }

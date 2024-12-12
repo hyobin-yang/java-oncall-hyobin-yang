@@ -1,4 +1,4 @@
-package oncall.model;
+package oncall.model.oncall;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class HolidayWorkers {
 
     public void changeWorkerToNext(int index){
         String temp = workers.get(index);
-        if ((index+1) >= workers.size()){
+        if ((index + 1) >= workers.size()){
             workers.set(index, workers.get(0));
             workers.set(0, temp);
             return;

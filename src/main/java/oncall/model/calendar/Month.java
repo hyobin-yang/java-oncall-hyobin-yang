@@ -1,6 +1,8 @@
-package oncall.model;
+package oncall.model.calendar;
 
 import oncall.exception.ErrorMessages;
+
+import java.util.Arrays;
 
 public enum Month {
     JAN(1,31),
@@ -25,12 +27,10 @@ public enum Month {
     }
 
     public static Month getMonth(int input){
-        for (Month month : values()){
-            if (month.monthNumber == input){
-                return month;
-            }
-        }
-        throw new IllegalArgumentException(ErrorMessages.INVALID_INPUT.getMessage());
+        return Arrays.stream(Month.values())
+                .filter(m -> m.monthNumber == input)
+                .findFirst()
+                .orElseThrow( () -> new IllegalArgumentException(ErrorMessages.INVALID_INPUT.getMessage()));
     }
 
     public int getEndDate(){

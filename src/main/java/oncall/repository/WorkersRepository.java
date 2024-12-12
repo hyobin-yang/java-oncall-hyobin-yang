@@ -1,10 +1,10 @@
 package oncall.repository;
 
 import oncall.dto.OncallRequireDTO;
-import oncall.model.Day;
-import oncall.model.HolidayWorkers;
-import oncall.model.OncallAssignment;
-import oncall.model.WeekdayWorkers;
+import oncall.model.calendar.Day;
+import oncall.model.oncall.HolidayWorkers;
+import oncall.model.oncall.OncallAssignment;
+import oncall.model.oncall.WeekdayWorkers;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -29,10 +29,6 @@ public class WorkersRepository {
         this.holidayWorkers = new HolidayWorkers(workers);
     }
 
-    public void addAssignment(OncallAssignment assignment){
-        assignments.add(assignment);
-    }
-
     public void setPreviousDayNumber(int number){
         dayNumber = number;
     }
@@ -47,8 +43,7 @@ public class WorkersRepository {
             holidayWorkerNumber= 0;
             return;
         }
-        previousWorkerName = workerName;
-        updateDayNumber();
+        updateAssignmentInformation(workerName);
         holidayWorkerNumber += 1;
     }
 
@@ -62,8 +57,7 @@ public class WorkersRepository {
             holidayWorkerNumber= 0;
             return;
         }
-        previousWorkerName = workerName;
-        updateDayNumber();
+        updateAssignmentInformation(workerName);
         holidayWorkerNumber += 1;
     }
 
@@ -77,9 +71,13 @@ public class WorkersRepository {
             weekdayWorkerNumber = 0;
             return;
         }
+        updateAssignmentInformation(workerName);
+        weekdayWorkerNumber += 1;
+    }
+
+    private void updateAssignmentInformation(String workerName){
         previousWorkerName = workerName;
         updateDayNumber();
-        weekdayWorkerNumber += 1;
     }
 
     private boolean isWorkInARow(String name){
@@ -97,5 +95,4 @@ public class WorkersRepository {
     public LinkedList<OncallAssignment> getAssignments() {
         return assignments;
     }
-
 }

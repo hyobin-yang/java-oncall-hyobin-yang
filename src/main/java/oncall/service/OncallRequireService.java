@@ -1,8 +1,8 @@
 package oncall.service;
 
 import oncall.dto.OncallRequireDTO;
-import oncall.model.Day;
-import oncall.model.Month;
+import oncall.model.calendar.Day;
+import oncall.model.calendar.Month;
 import oncall.util.Converter;
 
 import java.util.Arrays;

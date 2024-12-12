@@ -1,7 +1,7 @@
 package oncall.dto;
 
-import oncall.model.Day;
-import oncall.model.Month;
+import oncall.model.calendar.Day;
+import oncall.model.calendar.Month;
 
 public record OncallRequireDTO(Month month, Day day) {
 }

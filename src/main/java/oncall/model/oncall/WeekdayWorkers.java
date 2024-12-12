@@ -1,4 +1,4 @@
-package oncall.model;
+package oncall.model.oncall;
 
 import java.util.List;
 

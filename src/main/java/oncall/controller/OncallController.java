@@ -47,9 +47,8 @@ public class OncallController {
 
     private void printResult(){
         List<OncallAssignmentDTO> resultsDTO = oncallAssignmentService.getOncallAssignmentDTO();
-        for (OncallAssignmentDTO dto : resultsDTO){
-            outputView.printAssignment(dto.month(), dto.date(), dto.day(), dto.isLegalHoliday(), dto.workerName());
-        }
+        resultsDTO.forEach( dto -> outputView.printAssignment(dto.month(), dto.date(), dto.day(),
+                                                                dto.isLegalHoliday(), dto.workerName()));
     }
 
 }
