@@ -5,7 +5,7 @@ import oncall.dto.OncallRequireDTO;
 import oncall.exception.ErrorMessages;
 import oncall.model.calendar.Day;
 import oncall.model.calendar.DayInformation;
-import oncall.model.calendar.Holiday;
+import oncall.model.calendar.LegalHoliday;
 import oncall.model.calendar.Month;
 import oncall.model.constant.OncallConstant;
 import oncall.model.oncall.OncallAssignment;
@@ -71,7 +71,7 @@ public class OncallAssignmentService {
     }
 
     private DayInformation findDayInformation(Month month, int date, Day day){
-        if (Holiday.isLegalHoliday(month.getMonthNumber(), date)){
+        if (LegalHoliday.isLegalHoliday(month.getMonthNumber(), date)){
             return DayInformation.LEGAL_HOLIDAY;
         }
         if (day.isHoliday()){
